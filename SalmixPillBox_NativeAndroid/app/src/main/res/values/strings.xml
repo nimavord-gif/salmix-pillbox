@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">دارویار سالمیکس</string>
+    <string name="channel_name">هشدارهای دارویار سالمیکس</string>
+    <string name="channel_description">کانال اعلان و آلارم زمان مصرف داروهای سالمیکس</string>
+</resources>
