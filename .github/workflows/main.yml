@@ -1,0 +1,36 @@
+name: ساخت فایل نصبی دارویار سالمیکس (Build Native APK)
+
+on:
+  push:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: کامپایل پروژه کاتلین و تولید APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: دریافت سورس کد
+        uses: actions/checkout@v4
+
+      - name: تنظیم جاوا ۱۷
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: کامپایل نیتیو با گریدل
+        run: |
+          if [ -d "SalmixPillBox_NativeAndroid" ]; then
+            cd SalmixPillBox_NativeAndroid
+          fi
+          chmod +x ./gradlew
+          ./gradlew assembleDebug --stacktrace
+
+      - name: آماده‌سازی فایل نصبی APK برای دانلود
+        uses: actions/upload-artifact@v4
+        with:
+          name: دارویار_سالمیکس_Native_APK
+          path: "**/*.apk"
+          retention-days: 14
